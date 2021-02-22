@@ -1,0 +1,18 @@
+---
+name: fish-actions/syntax-check
+
+description: Syntax check all fish files in your repository
+
+branding:
+  icon: check-circle
+  color: blue
+
+runs:
+  using: composite
+
+  steps:
+    - run: |
+        for file in $GITHUB_WORKSPACE/**.fish
+          fish --no-execute $file
+        end
+      shell: fish {0}
