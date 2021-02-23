@@ -12,7 +12,11 @@ runs:
 
   steps:
     - run: |
+        set -l numFails 0
+
         for file in $GITHUB_WORKSPACE/**.fish
-          fish --no-execute $file
+            fish --no-execute $file || set numFails (math $numFails + 1)
         end
+
+        exit $numFails
       shell: fish {0}
